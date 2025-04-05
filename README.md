@@ -6,9 +6,21 @@ This repository contains two main projects:
 
 ## Prerequisites
 
-- Node.js v22.14.0 or later
 - Java (for DataSpace CE)
-- npm (Node Package Manager)
+
+
+## Initial Setup
+
+### Git Configuration
+
+
+2. Clone the repository:
+   ```bash
+   # Using SSH (recommended)
+   git clone git@github.com:i-mary-ershova/not_designers.git
+   # OR using HTTPS
+   git clone https://github.com/i-mary-ershova/not_designers.git
+   ```
 
 ## Project Structure
 
@@ -46,9 +58,24 @@ hackathon/
    npm install
    ```
 
-3. Start the development server:
+3. Start the development server (choose ONE of these methods):
+
+   Option A - Using environment variable (if not using Cursor IDE):
    ```bash
    export NODE_OPTIONS=--openssl-legacy-provider && npm start
+   ```
+
+   Option B - Using package.json script (works in all IDEs):
+   ```bash
+   npm run start:legacy
+   ```
+
+   Option C - Downgrade Node.js version (alternative solution):
+   ```bash
+   # Using nvm (Node Version Manager)
+   nvm install 16
+   nvm use 16
+   npm start
    ```
 
    The application will be available at http://localhost:3000
@@ -58,18 +85,22 @@ hackathon/
 ### Frontend (.env file)
 ```
 DS_ENDPOINT=http://localhost:8080/graphiql
-export NODE_OPTIONS=--openssl-legacy-provider
 ```
 
 ## Common Issues and Solutions
 
 1. OpenSSL Error:
-   If you encounter an OpenSSL-related error when starting the frontend, make sure to run the application with:
-   ```bash
-   export NODE_OPTIONS=--openssl-legacy-provider && npm start
-   ```
+   If you encounter OpenSSL-related errors, try these solutions in order:
+   - Use `npm run start:legacy` (recommended)
+   - Downgrade to Node.js v16
+   - Use a different IDE if the above solutions don't work
 
-2. 404 Not Found Errors:
+2. Git Authentication Errors:
+   - Ensure you've set up SSH keys correctly
+   - Or use HTTPS with a personal access token
+   - Check your Git configuration: `git config --list`
+
+3. 404 Not Found Errors:
    - Ensure the backend server is running before starting the frontend
    - Check that the `DS_ENDPOINT` in the frontend's `.env` file points to the correct backend URL
 
